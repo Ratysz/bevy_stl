@@ -4,7 +4,7 @@ use bevy_utils::Duration;
 use core::f32::consts::PI;
 
 fn main() {
-    App::build()
+    App::new()
         .insert_resource(Msaa { samples: 4 })
         .add_plugins(DefaultPlugins)
         .add_plugin(StlPlugin)
@@ -14,6 +14,7 @@ fn main() {
         .run();
 }
 
+#[derive(Component)]
 struct Disc {
     angle: f32,
 }
@@ -33,9 +34,9 @@ fn setup(
             ..Default::default()
         })
         .insert(Disc { angle: 0.0 });
-    commands.spawn_bundle(LightBundle {
+    commands.spawn_bundle(PointLightBundle {
         transform: Transform::from_xyz(30.0, 0.0, 20.0),
-        light: Light {
+        point_light: PointLight {
             range: 40.0,
             ..Default::default()
         },
